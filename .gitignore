@@ -1,0 +1,4 @@
+# Extraction outputs
+*.extracted/
+*.cab
+*.msi
