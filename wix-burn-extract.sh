@@ -180,4 +180,4 @@ while IFS= read -r -d '' f; do
         "$(stat -c %s "$f")" \
         "$(file -b "$f" | cut -c1-70)"
 done < <(find "$OUTDIR" -type f \( -iname '*.mbn' -o -iname '*.elf' \) -print0)
-[ $found -eq 0 ] && echo "  (none)"
+if [ $found -eq 0 ]; then echo "  (none)"; fi
