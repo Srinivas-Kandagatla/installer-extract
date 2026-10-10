@@ -139,7 +139,9 @@ for f in "$CAB_OUT"/*; do
                | tr -c '[:alnum:]._-' '_' \
                | sed 's/_\+/_/g;s/^_//;s/_$//')
         ver=$(msiinfo export "$f" Property 2>/dev/null \
-              | awk -F'\t' '$1=="ProductVersion"{print $2}' | head -n1)
+              | tr -d '\r' \
+              | awk -F'\t' '$1=="ProductVersion"{print $2}' | head -n1 \
+              | tr -c '[:alnum:]._\n-' '_' | tr -d '\n')
         newname="${subj:-package}${ver:+_$ver}.msi"
         i=1
         while [ -e "$WORK/$newname" ]; do
